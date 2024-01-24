@@ -23,7 +23,7 @@ body {
 }
 .music-player {
   position: relative;
-  width: 50%;
+  width: 25%;
   background-color: var(--shade2);
   padding: 2rem;
   text-align: center;
@@ -88,7 +88,7 @@ button {
   padding: 1rem;
   text-align: center;
   text-transform: capitalize;
-  display: flex;
+  display: none;
   flex-direction: column;
 }
 .playlist button {
