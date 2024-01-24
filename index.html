@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="music-player">
+        <div class="song-img">
+          <img src="" alt="" />
+        </div>
+        <div class="song-info">
+          <h2 id="track-name"></h2>
+          <h3 id="artist"></h3>
+          <section class="duration-section">
+            <!-- <span id="current-time">0</span> -->
+            <div class="progress-bar">
+              <p id="progress"></p> 
+            </div>
+            <!-- <span id="duration">0</span> -->
+          </section>
+
+          <audio id="audio">
+            <source src="" type="audio/mpeg" />
+          </audio>
+        </div>
+
+        <form class="controls">
+          <button id="shuffle">shuffle</button>
+          <button id="prev">prev</button>
+          <button id="play-pause">play</button>
+          <button id="next">next</button>
+          <button id="repeat">repeat</button>
+        </form>
+        <div id="seek-bar"></div>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>

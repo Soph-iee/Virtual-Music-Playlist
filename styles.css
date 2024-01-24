@@ -1,0 +1,76 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+:root {
+  --rootcolor: blue;
+  --shade1: rgb(235, 235, 240);
+  --shade2: rgb(136, 136, 223);
+  --shade3: rgb(33, 33, 58);
+  --shade4: rgb(65, 65, 114);
+  --shade5: rgba(153, 153, 223, 0.411);
+}
+
+body {
+  background-color: var(--shade1);
+}
+.container {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.music-player {
+  width: 50%;
+  background-color: var(--shade2);
+  padding: 2rem;
+  text-align: center;
+  text-transform: capitalize;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.song-img {
+  background-color: var(--rootcolor);
+  width: 50%;
+  align-self: center;
+  height: 10rem;
+}
+.song-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.progress-bar {
+  border: 0.1rem solid var(--shade5);
+  border-radius: 8px;
+  height: 0.5rem;
+  width: 100%;
+}
+#progress {
+  border-radius: 8px;
+  background-color: var(--shade3);
+  height: 0.4rem;
+  width: 100%;
+}
+.duration-section {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.controls {
+  display: flex;
+  justify-content: space-between;
+}
+button {
+  padding: 5px;
+  border: 2px solid var(--shade2);
+  border-radius: 8px;
+  color: var(--shade3);
+  font-size: 12px;
+  background-color: var(--shade1);
+  text-align: center;
+  font-family: inherit;
+  text-decoration: none;
+}
