@@ -74,6 +74,10 @@ button {
   font-family: inherit;
   text-decoration: none;
 }
+button:hover{
+  cursor: pointer;
+
+}
 .fa-solid {
   font-size: 1rem;
   color: var(--shade3);
