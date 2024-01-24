@@ -15,10 +15,11 @@
         <div class="song-info">
           <h2 id="track-name"></h2>
           <h3 id="artist"></h3>
+          
           <section class="duration-section">
             <!-- <span id="current-time">0</span> -->
             <div class="progress-bar">
-              <p id="progress"></p> 
+              <p id="progress"></p>
             </div>
             <!-- <span id="duration">0</span> -->
           </section>
@@ -29,15 +30,20 @@
         </div>
 
         <form class="controls">
-          <button id="shuffle">shuffle</button>
-          <button id="prev">prev</button>
-          <button id="play-pause">play</button>
-          <button id="next">next</button>
-          <button id="repeat">repeat</button>
+          <button id="shuffle"><i class="fa-solid fa-shuffle"></i></button>
+          <button id="prev"><i class="fa-solid fa-backward"></i></button>
+          <button id="play-pause"><i class=" play-icon fa-solid fa-play"></i></button>
+        
+          <button id="next"><i class="fa-solid fa-forward"></i></button>
+          <button id="repeat"><i class="fa-solid fa-repeat"></i></button>
         </form>
         <div id="seek-bar"></div>
       </div>
     </div>
+    <script
+      src="https://kit.fontawesome.com/deb1d85024.js"
+      crossorigin="anonymous"
+    ></script>
     <script src="script.js"></script>
   </body>
 </html>

@@ -45,7 +45,7 @@ class LinkedList {
     }
     return songs;
   }
-    removeSong(index) {
+  removeSong(index) {
     if (index > 0 && index > this.size) {
       return;
     }
@@ -141,7 +141,7 @@ function playSong() {
   artistName.innerHTML = playingNow.artist;
   albumImage.style.backgroundColor = `${playingNow.color}`;
   audio.src = `${playingNow.filepath}`;
-  audio.play();
+  // audio.play();
 }
 nextBtn.addEventListener("click", function (e) {
   e.preventDefault();
@@ -161,8 +161,9 @@ playBtn.addEventListener("click", function (e) {
   e.preventDefault();
   if (audio.paused) {
     audio.play();
-  } else audio.pause();
-  // playBtn.innerHTML = "pause";
+  } else {
+    audio.pause();
+  }
 });
 audio.addEventListener("timeupdate", function () {
   let currentTime = audio.currentTime;
