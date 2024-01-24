@@ -19,10 +19,9 @@ class Node {
   }
 }
 class Song {
-  constructor(title, artist, album, filepath, color) {
+  constructor(title, artist, filepath, color) {
     this.title = title;
     this.artist = artist;
-    this.album = album;
     this.filepath = filepath;
     this.color = color;
   }
@@ -45,6 +44,14 @@ class LinkedList {
     }
     return songs;
   }
+  songList() {
+    let current = this.head;
+    while (current) {
+      console.log(current.data.title);
+      current = current.next;
+    }
+    return current;
+  }
   removeSong(index) {
     if (index > 0 && index > this.size) {
       return;
@@ -66,25 +73,17 @@ class LinkedList {
   }
 }
 const musicPlayer = new LinkedList();
-const song1 = new Song(
-  "stand up",
-  "Cynthia Erivo",
-  "go",
-  "audio 1.mp3",
-  "pink"
+const song1 = new Song("ayo", "ayoife", "audio 4.mp3", "pink");
+const song2 = new Song(
+  "3 minutes charge II",
+  "apostle segun obadje",
+  "audio 2.mp3",
+  "aqua"
 );
-const song2 = new Song("sit down", "Josh 2Funny", "go", "audio 2.mp3", "aqua");
-const song3 = new Song(
-  "carryon",
-  "John Legend",
-  "go",
-  "audio 3.mp3",
-  "blueviolet"
-);
+const song3 = new Song("ferrari", "unkown artist", "audio 3.mp3", "blueviolet");
 const song4 = new Song(
-  "fireon fire",
-  "Sam Smith",
-  "go",
+  "3 minutes charge I",
+  "apostle segun obadje",
   "audio 1.mp3",
   "brown"
 );
@@ -92,6 +91,7 @@ musicPlayer.addSong(song1);
 musicPlayer.addSong(song2);
 musicPlayer.addSong(song3);
 musicPlayer.addSong(song4);
+musicPlayer.songList()
 
 const test = musicPlayer.songArray();
 let count = 0;
@@ -141,7 +141,7 @@ function playSong() {
   artistName.innerHTML = playingNow.artist;
   albumImage.style.backgroundColor = `${playingNow.color}`;
   audio.src = `${playingNow.filepath}`;
-  // audio.play();
+  audio.play();
 }
 nextBtn.addEventListener("click", function (e) {
   e.preventDefault();
@@ -160,10 +160,13 @@ prevBtn.addEventListener("click", function (e) {
 playBtn.addEventListener("click", function (e) {
   e.preventDefault();
   if (audio.paused) {
+    // playBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
     audio.play();
   } else {
+    // playBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
     audio.pause();
   }
+  // isPlaying = !isPlaying;
 });
 audio.addEventListener("timeupdate", function () {
   let currentTime = audio.currentTime;
