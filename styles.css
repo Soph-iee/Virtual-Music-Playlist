@@ -4,7 +4,7 @@
   padding: 0;
 }
 :root {
-  --rootcolor: blue;
+  --rootcolor: rgb(221, 221, 243);
   --shade1: rgb(235, 235, 240);
   --shade2: rgb(136, 136, 223);
   --shade3: rgb(33, 33, 58);
@@ -64,6 +64,7 @@ body {
   display: flex;
   justify-content: space-between;
 }
+
 button {
   padding: 5px;
   border: none;
@@ -80,6 +81,9 @@ button:hover {
 .fa-solid {
   font-size: 1rem;
   color: var(--shade3);
+}
+.controls .active {
+  color: var(--rootcolor);
 }
 .playlist {
   position: absolute;
@@ -103,6 +107,6 @@ li {
 }
 @media only screen and (max-width: 600px) {
   .music-player {
-    width: 100%;
+    width: 80%;
   }
 }
