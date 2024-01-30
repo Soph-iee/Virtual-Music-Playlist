@@ -8,7 +8,8 @@
   </head>
   <body>
     <div class="container">
-      <div class="music-player "> 
+      <div class="music-player">
+        <button><i class="fa-solid fa-list playlist-icon"></i></button>
         <div class="song-img">
           <img src="" alt="" />
         </div>
@@ -16,41 +17,32 @@
           <h2 id="track-name"></h2>
           <h3 id="artist"></h3>
           <section class="duration-section">
-            <!-- <span id="current-time">0</span> -->
             <div class="progress-bar">
               <p id="progress"></p>
             </div>
-            <!-- <span id="duration">0</span> -->
           </section>
           <audio id="audio">
             <source src="" type="audio/mpeg" />
           </audio>
         </div>
-        <!-- <i class="fa-thin fa-bars"></i> -->
-    
         <form class="controls">
-          <button  id="shuffle"><i class="active fa-solid fa-shuffle"></i></button>
-          <button id="prev"><i class="fa-solid fa-backward"></i></button>
+          <button><i id="shuffle" class="fa-solid fa-shuffle"></i></button>
+          <button><i id="prev" class="fa-solid fa-backward"></i></button>
           <button id="play-pause">
             <i class="play-icon fa-solid fa-play"></i>
           </button>
-
-          <button id="next"><i class="fa-solid fa-forward"></i></button>
-          <button id="repeat"><i class="fa-solid fa-repeat"></i></button>
+          <button><i id="next" class="fa-solid fa-forward"></i></button>
+          <button><i id="repeat" class="fa-solid fa-repeat"></i></button>
         </form>
         <div id="seek-bar"></div>
       </div>
-       <div class="playlist">
-      <button>    <i class="fa-solid fa-xmark"></i></button>
-      <ul class="songlist">
-        <li>
-hekkoS
-        </li>
-      </ul>
-     
+      <div class="playlist display">
+        <h3 class="header">Music List</h3>
+        <button><i class="fa-solid fa-xmark close"></i></button>
+        <ul class="songlist"></ul>
+      </div>
     </div>
-    </div>
-   
+
     <script
       src="https://kit.fontawesome.com/deb1d85024.js"
       crossorigin="anonymous"

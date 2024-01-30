@@ -9,11 +9,13 @@ const songImage = document.querySelector(".song-img"),
   shuffleSong = document.getElementById("shuffle"),
   repeatSong = document.getElementById("repeat"),
   mainContainer = document.querySelector(".music-player"),
-  prevBtn = document.getElementById("prev");
-const progressBar = document.getElementById("progress");
-///////////////////////////////////////////////
-//   using linkedlist data structure
-///////////////////////////////////////////////
+  prevBtn = document.getElementById("prev"),
+  playListContainer = document.querySelector(".playlist"),
+  closeBtn = document.querySelector(".close"),
+  openBtn = document.querySelector(".playlist-icon"),
+  progressBar = document.getElementById("progress");
+
+////////////////////////////////////////////////////////////////////////////////////////////// LINKEDLIST
 class Node {
   constructor(data, next = null) {
     this.data = data;
@@ -47,36 +49,14 @@ class LinkedList {
     }
     return songs;
   }
-  songList() {
-    let current = this.head;
-    while (current) {
-      console.log(current.data.title);
-      current = current.next;
-    }
-    return current;
-  }
-  removeSong(index) {
-    if (index > 0 && index > this.size) {
-      return;
-    }
-    let current = this.head;
-    let count = 0;
-    let previous;
-    if (index === 0) {
-      this.head = current.next;
-    } else {
-      while (count < index) {
-        count++;
-        previous = current;
-        current = current.next;
-      }
-      previous.next = current.next;
-    }
-    this.size--;
-  }
 }
 const musicPlayer = new LinkedList();
-const song1 = new Song("ayo", "ayoife", "audio 4.mp3", "pink");
+const song1 = new Song(
+  "ayo - Joy",
+  "anendlessocean ft Moses Bliss ",
+  "audio 4.mp3",
+  "pink"
+);
 const song2 = new Song(
   "3 minutes charge II",
   "apostle segun obadje",
@@ -94,14 +74,10 @@ musicPlayer.addSong(song1);
 musicPlayer.addSong(song2);
 musicPlayer.addSong(song3);
 musicPlayer.addSong(song4);
-musicPlayer.songList();
-
 const allMusic = musicPlayer.songArray();
 let count = Math.floor(Math.random() * allMusic.length);
-console.log(count);
-// ///////////////////////////////////////////
-// working with stacks and queues
-//////////////////////////////////
+// //////////////////////////////////////////////////////////////////////////
+// QUEUE
 class playQueue {
   constructor() {
     this.queue = [];
@@ -115,89 +91,119 @@ class playQueue {
   isEmpty() {
     return this.queue.length === 0;
   }
-  shuffle() {
-    for (let i = this.queue.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [this.queue[i], this.queue[j]] = [this.queue[j], this.queue[i]];
-    }
+  playSong(element) {
+    songTitle.innerHTML = this.queue[element].title;
+    artistName.innerHTML = this.queue[element].artist;
+    albumImage.style.backgroundColor = `${this.queue[element].color}`;
+    audio.src = `${this.queue[element].filepath}`;
+  }
+  nextSong() {
+    if (count !== this.queue.length - 1) count++;
+    return count;
+  }
+  prevSong() {
+    if (count !== 0) return count--;
+  }
+  shuffleFunction() {
+    let randomIndex = Math.floor(Math.random() * allMusic.length);
+    do {
+      randomIndex = Math.floor(Math.random() * allMusic.length);
+    } while (randomIndex == count);
+    count = randomIndex;
+  }
+  removeSong(count) {
+    songQueue.dequeue();
+    const songList = document.querySelector("ul");
+    songList.innerHTML = "";
+    console.log(songQueue);
+    printSong();
   }
 }
-
 let songQueue = new playQueue();
 for (let i = 0; i < allMusic.length; i++) {
   const song = allMusic[i];
   songQueue.enqueue(song);
 }
-
-///////////////////////////////////////
-// functions and event listeners////
-//////////////////////////////////////
-window.addEventListener("load", () => {
-  playSong(count);
-});
-function playSong(element) {
-  songTitle.innerHTML = allMusic[element].title;
-  artistName.innerHTML = allMusic[element].artist;
-  albumImage.style.backgroundColor = `${allMusic[element].color}`;
-  audio.src = `${allMusic[element].filepath}`;
+///////////////////////////////////////////////////////////////////////////////
+// FUNCTIONS
+function closePlaylist() {
+  playListContainer.classList.add("display");
 }
-nextBtn.addEventListener("click", function (e) {
-  e.preventDefault();
-  if (count !== allMusic.length - 1) {
-    count++;
-    playSong(count);
-    playMusic();
-  }
-});
-prevBtn.addEventListener("click", function (e) {
-  e.preventDefault();
-  if (count !== 0) {
-    count--;
-    playSong(count);
-    playMusic();
-  }
-});
-function shuffleFunction() {
-  let randomIndex = Math.floor(Math.random() * allMusic.length);
-  do {
-    randomIndex = Math.floor(Math.random() * allMusic.length);
-  } while (randomIndex == count);
-  count = randomIndex;
-  console.log(count);
-  playSong(count);
-  playMusic();
+function openPlaylist() {
+  playListContainer.classList.toggle("display");
 }
-shuffleSong.addEventListener("click", function (e) {
-  e.preventDefault();
-  shuffleFunction();
-});
 function pauseMusic() {
   mainContainer.classList.add("paused");
   playBtn.innerHTML = '<i class="play-icon fa-solid fa-play"></i>';
   audio.pause();
 }
-
 function playMusic() {
   mainContainer.classList.remove("paused");
   playBtn.innerHTML = '<i class="play-icon fa-solid fa-pause"></i>';
   audio.play();
 }
-
-playBtn.addEventListener("click", function (e) {
+function printSong() {
+  const songList = document.querySelector("ul");
+  let theQueue = songQueue.queue;
+  for (let i = 0; i < theQueue.length; i++) {
+    let liTag = `<li li-index="${i}">
+ <div class='row'>
+  <span>${theQueue[i].title}</span>
+  <p>${theQueue[i].artist}</p>
+  </div>
+  <audio class ='${theQueue[i].filepath} src=" ${theQueue[i].src}"></audio>
+  </li>`;
+    songList.insertAdjacentHTML("beforeend", liTag);
+  }
+}
+// //////////////////////////////////////////////////////////////////////////////////EVENT LISTENERS
+window.addEventListener("load", () => {
+  songQueue.playSong(count);
+  printSong();
+});
+closeBtn.addEventListener("click", closePlaylist);
+playBtn.addEventListener("click", (e) => {
   e.preventDefault();
   const isPlaying = mainContainer.classList.contains("paused");
   isPlaying ? playMusic() : pauseMusic();
 });
-audio.addEventListener("timeupdate", function () {
+audio.addEventListener("timeupdate", () => {
   let currentTime = audio.currentTime;
   let duration = audio.duration;
   let progressWidth = (currentTime / duration) * 100;
   progressBar.style.width = progressWidth + "%";
 });
-audio.addEventListener("ended", function () {
-  // e.preventDefault();
-  if (count !== allMusic.length - 1) {
-    count++;
-    playSong();
+audio.addEventListener("ended", () => {
+  if (repeatSong.classList.contains("clicked")) {
+    audio.currentTime = 0;
+    songQueue.playSong(count);
+    playMusic();
+  } else {
+    if (count !== allMusic.length - 1) {
+      count++;
+      playSong();
+      console.log(allMusic);
+    }
   }
 });
+nextBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+  songQueue.nextSong();
+  songQueue.playSong(count);
+  playMusic();
+});
+prevBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+  songQueue.prevSong();
+  songQueue.playSong(count);
+  playMusic();
+});
+shuffleSong.addEventListener("click", (e) => {
+  e.preventDefault();
+  shuffleSong.classList.toggle("clicked");
+});
+repeatSong.addEventListener("click", (e) => {
+  e.preventDefault();
+  repeatSong.classList.toggle("clicked");
+});
+openBtn.addEventListener("click", openPlaylist);
