@@ -95,13 +95,13 @@ button {
 .playlist {
   position: absolute;
   height: 10rem;
-  width: fit-content;
-  top: 65%;
+  width: 25%;
+  top: 70%;
   left: 50%;
   transform: translate(-50%, -50%);
   border-radius: 8px;
   background-color: var(--rootcolor2);
-  padding: 0 5rem;
+  padding: 0 1rem;
   text-transform: capitalize;
   display: flex;
   flex-direction: column;
