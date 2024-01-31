@@ -111,13 +111,6 @@ class playQueue {
     } while (randomIndex == count);
     count = randomIndex;
   }
-  removeSong(count) {
-    songQueue.dequeue();
-    const songList = document.querySelector("ul");
-    songList.innerHTML = "";
-    console.log(songQueue);
-    printSong();
-  }
 }
 let songQueue = new playQueue();
 for (let i = 0; i < allMusic.length; i++) {
@@ -142,6 +135,7 @@ function playMusic() {
   playBtn.innerHTML = '<i class="play-icon fa-solid fa-pause"></i>';
   audio.play();
 }
+
 function printSong() {
   const songList = document.querySelector("ul");
   let theQueue = songQueue.queue;
@@ -151,15 +145,19 @@ function printSong() {
   <span>${theQueue[i].title}</span>
   <p>${theQueue[i].artist}</p>
   </div>
+   <i  index = '${i}' class="fa-solid fa-trash"></i>
   <audio class ='${theQueue[i].filepath} src=" ${theQueue[i].src}"></audio>
   </li>`;
     songList.insertAdjacentHTML("beforeend", liTag);
   }
+  return songList;
 }
+printSong();
+
 // //////////////////////////////////////////////////////////////////////////////////EVENT LISTENERS
 window.addEventListener("load", () => {
   songQueue.playSong(count);
-  printSong();
+  // printSong();
 });
 closeBtn.addEventListener("click", closePlaylist);
 playBtn.addEventListener("click", (e) => {
@@ -207,3 +205,16 @@ repeatSong.addEventListener("click", (e) => {
   repeatSong.classList.toggle("clicked");
 });
 openBtn.addEventListener("click", openPlaylist);
+
+///////////////using li tag to remove song
+const allDeleteBtn = document.querySelectorAll(".fa-trash");
+for (let index = 0; index < allDeleteBtn.length; index++) {
+  const deleteBtn = allDeleteBtn[index];
+  deleteBtn.addEventListener("click", function () {
+    const index = deleteBtn.getAttribute("index");
+    songQueue.queue.splice(index, 1);
+    const songList = document.querySelector("ul");
+    songList.innerHTML = "";
+    printSong();
+  });
+}
