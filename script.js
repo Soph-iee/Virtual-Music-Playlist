@@ -241,5 +241,4 @@ repeatBtn.addEventListener("click", (e) => {
     alertMessage("repeat on");
   } else alertMessage("repeat off");
 });
-
 openBtn.addEventListener("click", openPlaylist);
