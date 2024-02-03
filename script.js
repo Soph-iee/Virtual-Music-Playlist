@@ -102,8 +102,6 @@ class playQueue {
       const randomIndex = Math.floor(Math.random() * (i + 1));
       [array[i], array[randomIndex]] = [array[randomIndex], array[i]];
     }
-    console.log(array);
-    array = array;
     return array;
   }
   nextSong() {
