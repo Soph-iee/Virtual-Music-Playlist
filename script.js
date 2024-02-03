@@ -7,14 +7,15 @@ const songImage = document.querySelector(".song-img"),
   playBtn = document.getElementById("play-pause"),
   nextBtn = document.getElementById("next"),
   shuffleBtn = document.getElementById("shuffle"),
-  repeatSong = document.getElementById("repeat"),
+  repeatBtn = document.getElementById("repeat"),
   mainContainer = document.querySelector(".music-player"),
   prevBtn = document.getElementById("prev"),
   playListContainer = document.querySelector(".playlist"),
   closeBtn = document.querySelector(".close"),
   openBtn = document.querySelector(".playlist-icon"),
   songList = document.querySelector("ul"),
-  progressBar = document.getElementById("progress");
+  progressBar = document.getElementById("progress"),
+  alertMsg = document.querySelector(".alert");
 
 /////////////// LINKEDLIST
 class Node {
@@ -119,6 +120,12 @@ for (let i = 0; i < allMusic.length; i++) {
   songQueue.enqueue(song);
 }
 ///////////////FUNCTIONS
+function alertMessage(text) {
+  alertMsg.innerText = text;
+  setTimeout(function () {
+    alertMsg.innerText = "playing  now";
+  }, 2000);
+}
 function closePlaylist() {
   playListContainer.classList.add("display");
 }
@@ -167,6 +174,7 @@ function printSong(songs) {
 window.addEventListener("load", () => {
   songQueue.playSong(count);
   printSong(songQueue);
+  alertMessage("🎵welcome🎵");
 });
 closeBtn.addEventListener("click", closePlaylist);
 playBtn.addEventListener("click", (e) => {
@@ -181,7 +189,7 @@ audio.addEventListener("timeupdate", () => {
   progressBar.style.width = progressWidth + "%";
 });
 audio.addEventListener("ended", () => {
-  if (repeatSong.classList.contains("clicked")) {
+  if (repeatBtn.classList.contains("clicked")) {
     audio.currentTime = 0;
     songQueue.playSong(count);
     playMusic();
@@ -206,12 +214,14 @@ audio.addEventListener("ended", () => {
 });
 nextBtn.addEventListener("click", (e) => {
   e.preventDefault();
+  alertMessage("next song");
   songQueue.nextSong();
   songQueue.playSong(count);
   playMusic();
 });
 prevBtn.addEventListener("click", (e) => {
   e.preventDefault();
+  alertMessage("previous song");
   songQueue.prevSong();
   songQueue.playSong(count);
   playMusic();
@@ -220,10 +230,16 @@ shuffleBtn.addEventListener("click", (e) => {
   e.preventDefault();
   shuffleBtn.classList.toggle("clicked");
   shuffleBtn.classList.toggle("active");
+  if (shuffleBtn.classList.contains("active")) {
+    alertMessage("shuffle on");
+  } else alertMessage("shuffle off");
 });
-repeatSong.addEventListener("click", (e) => {
+repeatBtn.addEventListener("click", (e) => {
   e.preventDefault();
-  repeatSong.classList.toggle("clicked");
+  repeatBtn.classList.toggle("clicked");
+  if (repeatBtn.classList.contains("clicked")) {
+    alertMessage("repeat on");
+  } else alertMessage("repeat off");
 });
 
 openBtn.addEventListener("click", openPlaylist);
