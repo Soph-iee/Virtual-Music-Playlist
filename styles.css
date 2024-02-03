@@ -88,8 +88,8 @@ button {
 }
 button:focus {
   outline: none;
-  box-shadow: 0 0 5px var(--shade4);
-  background-color: var(--shade2);
+  /* box-shadow: 0 0 5px var(--shade4);
+  background-color: var(--shade2); */
 }
 .fa-solid:hover {
   cursor: pointer;
